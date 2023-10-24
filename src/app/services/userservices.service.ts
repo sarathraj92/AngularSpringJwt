@@ -28,6 +28,11 @@ export class UserservicesService {
 
 
   public registerUser(user:User):Observable<string>{
+   
     return this.http.post<string>(`${this.baseURL}/create`,user);
+  }
+
+  public logout(){
+     return this.http.get(this.baseURL + '/logout');
   }
 }

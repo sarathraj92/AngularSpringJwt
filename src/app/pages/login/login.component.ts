@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       
       const _obj: UserCred = {
-        userName: this.loginForm.value.userName as string,
+        username: this.loginForm.value.userName as string,
         password: this.loginForm.value.password as string
       }
       console.log(_obj);

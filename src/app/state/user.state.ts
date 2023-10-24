@@ -17,7 +17,7 @@ export const initalState:UsersState=UserAdapter.getInitialState({
     
     firstName:'',
     lastName:'',
-    userName:'',
+    username:'',
     phoneNumber:'',
     gender:'',
     email:'',

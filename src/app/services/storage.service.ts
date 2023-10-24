@@ -36,12 +36,19 @@ export class StorageService {
     let user1 =localStorage.getItem("user");
    
    
-    if(user1!=null){
+    if(user1!==null){
        const user=JSON.parse(user1) as User;
        return user;
 
     }
-    return user1;
+    return null;
+  }
+
+  public isLoggedIn():boolean{
+    if(localStorage.getItem("user")!== null){
+      return true;
+    }
+    return false;
   }
 
   
@@ -67,24 +74,24 @@ export class StorageService {
 
 
 
-  static isAdminLoggedIn(): boolean{
-    if(this.getTokens() == null){
-      return false;
-    }
-    return true;
+  // static isAdminLoggedIn(): boolean{
+  //   if(this.getTokens() == null){
+  //     return false;
+  //   }
+  //   return true;
 
-  }
+  // }
 
-  static isStudentLoggedIn(): boolean{
-    if(this.getTokens() == null){
-      return false;
-    }
+  // static isStudentLoggedIn(): boolean{
+  //   if(this.getTokens() == null){
+  //     return false;
+  //   }
     
-    return true;
+  //   return true;
 
-  }
+  // }
 
-  static logout(){
+  public logout(){
     localStorage.removeItem("token");
     localStorage.removeItem("user");
   }

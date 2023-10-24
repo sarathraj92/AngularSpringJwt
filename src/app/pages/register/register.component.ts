@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
 
     this.registerform = this.builder.group({
-      userName: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(4)])),
+      username: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(4)])),
       password: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(4)])),
       confirmPassword: this.builder.control('', [Validators.required]),
       firstName: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(4)])),
@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerform.valid) {
       if (this.registerform.value.password === this.registerform.value.confirmPassword) {
         const _userobj: User = {
-          userName: this.registerform.value.userName as string,
+          username: this.registerform.value.username as string,
           password: this.registerform.value.password as string,
           firstName: this.registerform.value.firstName as string,
           lastName: this.registerform.value.lastName as string,

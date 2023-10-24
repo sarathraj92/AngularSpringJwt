@@ -16,7 +16,7 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import {userReducer} from './state/user.reducers'
 import {userEffects} from './state/user.effects'
 import { AppEffects } from './common/common.effects';
-import { AuthInterceptorInterceptor } from './services/auth-interceptor.interceptor';
+import { AuthInterceptorInterceptor } from './services/authInterceptor/auth-interceptor.interceptor';
 import { AdminDashboardComponent } from './pages/AdminDashboard/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './pages/UserDashboard/user-dashboard/user-dashboard.component';
 import { MaterialModule } from './Material.module';

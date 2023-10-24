@@ -36,10 +36,10 @@
 
                       <mat-form-field appearance="fill"  class="full-width">
                         <mat-label>User Name</mat-label>
-                        <input type="text"  formControlName="userName" name="userName" matInput placeholder="Enter Here">
-                        <div *ngIf="registerform.get('userName')?.invalid && registerform.get('userName')?.touched">
-                          <small class="text-danger" *ngIf="registerform.get('userName')?.errors?.['required']">UserName is Required</small>
-                          <small class="text-danger" *ngIf="registerform.get('userName')?.errors?.['minlength']">UserName requires min 4 characters</small>
+                        <input type="text"  formControlName="username" name="username" matInput placeholder="Enter Here">
+                        <div *ngIf="registerform.get('username')?.invalid && registerform.get('username')?.touched">
+                          <small class="text-danger" *ngIf="registerform.get('username')?.errors?.['required']">UserName is Required</small>
+                          <small class="text-danger" *ngIf="registerform.get('username')?.errors?.['minlength']">UserName requires min 4 characters</small>
                         </div>
                       </mat-form-field>
 

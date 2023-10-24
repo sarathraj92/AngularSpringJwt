@@ -48,7 +48,7 @@ export class EditUserComponent implements OnInit {
       
       this.editForm.setValue({
        
-        username:res.userName,
+        username:res.username,
         password:res.password,
         confirmPassword:res.password,
         firstName:res.firstName,
@@ -76,7 +76,7 @@ export class EditUserComponent implements OnInit {
     if(this.editForm.valid){
       const _obj:User={
           
-          userName: this.editForm.value.username as string,
+          username: this.editForm.value.username as string,
           password: this.editForm.value.password as string,
           firstName: this.editForm.value.firstName as string,
           lastName: this.editForm.value.lastName as string,

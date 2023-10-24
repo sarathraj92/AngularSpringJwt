@@ -60,7 +60,7 @@ export class AddUserComponent implements OnInit  {
     if(this.addForm.valid){
       const _obj:User={
           id:this.addForm.value.id as number,
-          userName: this.addForm.value.username as string,
+          username: this.addForm.value.username as string,
           password: this.addForm.value.password as string,
           firstName: this.addForm.value.firstName as string,
           lastName: this.addForm.value.lastName as string,

@@ -4,11 +4,14 @@
     </button>
     <span>Crud</span>
     <span class="example-spacer"></span>
-    <button routerLink="login" mat-icon-button class="example-icon favorite-icon ml20" aria-label="Example icon-button with heart icon">
+    <button *ngIf="isLoggedIn" (click)="onLogout()"  routerLink="login" mat-icon-button class="example-icon favorite-icon mr20" aria-label="Example icon-button with heart icon">
+      Logout
+    </button>
+    <button *ngIf="!isLoggedIn" routerLink="login" mat-icon-button class="example-icon favorite-icon ml20" aria-label="Example icon-button with heart icon">
       
       Login
     </button>
-    <button routerLink="register" mat-icon-button class="example-icon favorite-icon mr20 ml20" aria-label="Example icon-button with heart icon">
+    <button *ngIf="!isLoggedIn" routerLink="register" mat-icon-button class="example-icon favorite-icon mr20 ml20" aria-label="Example icon-button with heart icon">
      
       Register
     </button>

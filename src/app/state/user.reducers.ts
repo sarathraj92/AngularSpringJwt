@@ -37,7 +37,7 @@ const _userReducer= createReducer(initalState,
     }),
     on(updateUserSuccess,(state,action)=>{
         const _newData= state.list.map(obj =>{
-            return obj.userName === action.inputData.userName ? action.inputData : obj
+            return obj.username === action.inputData.username ? action.inputData : obj
         })
         
         return{
@@ -47,7 +47,7 @@ const _userReducer= createReducer(initalState,
         }
     }),
     on(deleteUserSuccess,(state,action)=>{
-        const _newData= state.list.filter(o=> o.userName!== action.userName)
+        const _newData= state.list.filter(o=> o.username!== action.userName)
            
         
         return{

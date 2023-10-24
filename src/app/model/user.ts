@@ -3,7 +3,7 @@ export interface User {
     firstName:string;
     lastName:string;
     email:string;
-    userName:string;
+    username:string;
     password:string;
     phoneNumber:string;
     gender:string;
@@ -25,7 +25,7 @@ export interface User {
 }
 
 export interface UserCred{
-    userName:string;
+    username:string;
     password:string;
 }
 
