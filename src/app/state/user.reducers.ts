@@ -1,17 +1,14 @@
 import { createReducer, on } from "@ngrx/store";
-import { initalState } from "./user.state";
+import { UserAdapter, initalState } from "./user.state";
 import { addUserSuccess, deleteUserSuccess, getUserSuccess, loadUserFailure, loadUserSuccess, openPopup, updateUserSuccess } from "./user.actions";
 
 
 
 const _userReducer= createReducer(initalState,
     on(loadUserSuccess,(state,action)=>{
+
+        return UserAdapter.setAll(action.list,state);
         
-        return{
-            ...state,
-            list:[...action.list],
-            errorMessage:''
-        }
     }),
     on(loadUserFailure,(state,action)=>{
         return{
@@ -21,11 +18,7 @@ const _userReducer= createReducer(initalState,
         }
     }),on(addUserSuccess,(state,action)=>{
         
-        return{
-            ...state,
-            list:[...state.list,action.inputData],
-            errorMessage:''
-        }
+        return UserAdapter.addOne(action.inputData,state);
     }),
     on(getUserSuccess,(state,action)=>{
         
@@ -36,25 +29,10 @@ const _userReducer= createReducer(initalState,
         }
     }),
     on(updateUserSuccess,(state,action)=>{
-        const _newData= state.list.map(obj =>{
-            return obj.username === action.inputData.username ? action.inputData : obj
-        })
-        
-        return{
-            ...state,
-            list:_newData,
-            errorMessage:''
-        }
+        return UserAdapter.updateOne(action.inputData,state);
     }),
     on(deleteUserSuccess,(state,action)=>{
-        const _newData= state.list.filter(o=> o.username!== action.userName)
-           
-        
-        return{
-            ...state,
-            list:_newData,
-            errorMessage:''
-        }
+       return UserAdapter.removeOne(action.userName,state);
     })
     );
 

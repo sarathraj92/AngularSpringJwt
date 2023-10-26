@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { User, UserCred } from "../model/user";
+import { Update } from "@ngrx/entity";
 
 export const BEGIN_REGISTER='[auth] begin register'
 export const BEGIN_LOGIN='[auth] begin login';
@@ -35,7 +36,7 @@ export const getUser=createAction(GET_USER,props<{userName:string}>());
 export const getUserSuccess=createAction(GET_USER_SUCCESS,props<{obj:User}>());
 export const openPopup=createAction(OPEN_POPUP);
 export const updateUser=createAction(UPDATE_USER,props<{inputData:User}>());
-export const updateUserSuccess=createAction(UPDATE_USER_SUCCESS,props<{inputData:User}>());
+export const updateUserSuccess=createAction(UPDATE_USER_SUCCESS,props<{inputData:Update<User>}>());
 export const deleteUser=createAction(DELETE_USER,props<{userName:string}>());
 export const deleteUserSuccess=createAction(DELETE_USER_SUCCESS,props<{userName:string}>());
 

@@ -83,6 +83,7 @@ export class EditUserComponent implements OnInit {
           email: this.editForm.value.email as string,
           phoneNumber: this.editForm.value.phoneNumber as string,
           gender: this.editForm.value.gender as string,
+          
 
 
       }

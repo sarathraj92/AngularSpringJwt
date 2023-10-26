@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { HttpEvent } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -19,6 +20,7 @@ export class AdminDashboardComponent implements OnInit {
 
   datasource:any;
   userList:User[]=[];
+  filteredUserList: User[]=[];
   displayedColumns : string[] = ["firstName","lastName","username","phoneNumber","gender","email","action"]
   
   @ViewChild(MatPaginator) paginator!:MatPaginator;
@@ -39,6 +41,21 @@ ngOnInit(): void {
     
 }
 
+onSearch(event:Event){
+  const inputElement=event.target as HTMLInputElement;
+
+  const textValue=inputElement.value;
+  this.filteredUserList = this.userList.filter(user =>
+    user.firstName.toLowerCase().includes(textValue.toLowerCase())
+  );
+  
+  this.datasource = new MatTableDataSource<User>(this.filteredUserList);
+  this.datasource.paginator = this.paginator;
+  this.datasource.sort = this.sort;
+
+
+}
+
 
 
 onAdd(){
@@ -47,10 +64,10 @@ onAdd(){
 }
 
 
-onEdit(code:string,id:number){
+onEdit(code:string){
   console.log(code);
  
-  this.openEditPopup(id,'Update User');
+  this.openEditPopup(+code,'Update User');
   this.store.dispatch(getUser({userName:code}));
 }
 

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
 
+const USER = 'user';
+const TOKEN = 'token';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,16 +35,19 @@ export class StorageService {
 
 
 
-  public  getUser(): User | null{
-    let user1 =localStorage.getItem("user");
-   
-   
-    if(user1!==null){
-       const user=JSON.parse(user1) as User;
-       return user;
+  public static  getUser(): User | null{
+    const user=localStorage.getItem('user');
+    
 
+    if( typeof user === 'string'){
+      
+      const userParsed=JSON.parse(user) as User;
+      return userParsed;
+
+    }else{
+      return null;
     }
-    return null;
+  
   }
 
   public isLoggedIn():boolean{
@@ -61,14 +67,41 @@ export class StorageService {
   }
 
 
-  public getRole():string | null{
-    
-    if(this.getUser()==null){
-      return null;
+ 
+  static isAdminLoggedIn(): boolean{
+    if(this.getTokens() === null){
+      return false;
     }
     const user=this.getUser();
+    let role: string | null='';
+    if(user !== null && user.authorities !== undefined ){
+      role= user.authorities[0].authority
+    }
     
-    return '';
+  
+    if(typeof (role) === 'string' ){
+
+    return role === "ADMIN";
+    }
+    return false;
+  }
+
+  static isUserLoggedIn(): boolean{
+    if(this.getTokens() === null){
+      return false;
+    }
+    const user=this.getUser();
+    let role: string | null='';
+    if(user !== null && user.authorities !== undefined ){
+      role= user.authorities[0].authority
+    }
+    
+    
+    if(typeof (role) === 'string' ){
+
+    return role === "USER";
+    }
+    return false;
   }
  
 
@@ -95,4 +128,6 @@ export class StorageService {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
   }
+
+
 }

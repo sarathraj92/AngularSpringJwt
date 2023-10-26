@@ -8,7 +8,9 @@ export interface UsersState extends EntityState<User> {
     
   }
 
-export const UserAdapter = createEntityAdapter<User>();
+export const UserAdapter = createEntityAdapter<User>({
+  selectId: (user: User) => user.username
+});
 
 export const initalState:UsersState=UserAdapter.getInitialState({
   list:[],
@@ -21,7 +23,15 @@ export const initalState:UsersState=UserAdapter.getInitialState({
     phoneNumber:'',
     gender:'',
     email:'',
-    password:''
+    password:'',
+    authorities:[
+      {
+        authority:''
+      }
+
+    ]
+      
+    
 
   }
   

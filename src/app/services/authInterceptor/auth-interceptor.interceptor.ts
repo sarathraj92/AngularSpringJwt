@@ -17,7 +17,7 @@ export class AuthInterceptorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     
-    let authReq=request;
+    let authReq=request
 
     const token=this.storage.getToken();
 

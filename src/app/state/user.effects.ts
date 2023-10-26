@@ -14,6 +14,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { AdminserviceService } from '../pages/AdminDashboard/adminservice.service';
+import { Update } from '@ngrx/entity';
+import { User } from '../model/user';
 
 
 
@@ -96,7 +98,7 @@ _loadUser=createEffect(()=>{
           console.log(data);
           return loadUserSuccess({list:data})
 
-        }),catchError((_error)=> of(loadUserFailure({errorMessage:_error.error})))
+        }),catchError((_error)=> of(loadUserFailure({errorMessage:_error.message})))
       )
     })
   )
@@ -115,7 +117,8 @@ _addUser=createEffect(()=>{
           return of(addUserSuccess({inputData:action.inputData}),
           showalert({message:'Created Successfully',resulttype:'pass'}))
 
-        }),catchError((_error)=> of(showalert({message:'Failed to create User',resulttype:'fail'})))
+        }),catchError((_error)=> of(showalert(
+          {message:'Failed to create User:-'+_error.error,resulttype:'fail'})))
       )
     })
   )
@@ -147,8 +150,12 @@ _updateUser=createEffect(()=>{
       console.log("effects" + action.inputData);
       return this.adminService.updateUser(action.inputData).pipe(
         switchMap((data)=> {
+          const updateRecord:Update<User>={
+            id:action.inputData.username,
+            changes:action.inputData
+          }
           
-          return of(updateUserSuccess({inputData:action.inputData}),
+          return of(updateUserSuccess({inputData:updateRecord}),
           showalert({message:'Updated Successfully',resulttype:'pass'}))
 
         }),catchError((_error)=> of(showalert({message:'Failed to update User',resulttype:'fail'})))

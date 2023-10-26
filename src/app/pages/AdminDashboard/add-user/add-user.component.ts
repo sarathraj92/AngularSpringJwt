@@ -1,6 +1,7 @@
 import { Component,Inject,OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/model/user';
 import { addUser } from 'src/app/state/user.actions';
@@ -19,7 +20,7 @@ export class AddUserComponent implements OnInit  {
   title:String='Create User';
   
   constructor(private builder : FormBuilder,private ref:MatDialogRef<AddUserComponent>,
-    @Inject(MAT_DIALOG_DATA)public data:any,private store:Store){
+    @Inject(MAT_DIALOG_DATA)public data:any,private store:Store,private _snack:MatSnackBar){
 
   }
 
@@ -58,6 +59,7 @@ export class AddUserComponent implements OnInit  {
 
   onSubmit(){
     if(this.addForm.valid){
+      if (this.addForm.value.password === this.addForm.value.confirmPassword) {
       const _obj:User={
           id:this.addForm.value.id as number,
           username: this.addForm.value.username as string,
@@ -67,6 +69,7 @@ export class AddUserComponent implements OnInit  {
           email: this.addForm.value.email as string,
           phoneNumber: this.addForm.value.phoneNumber as string,
           gender: this.addForm.value.gender as string,
+       
 
 
       }
@@ -75,7 +78,16 @@ export class AddUserComponent implements OnInit  {
       
       
       this.closePopup();
+    }else{
+      this._snack.open("Password dont Match",'Ok',{
+        duration:3000
+      })
     }
+  }else{
+    this._snack.open("Fill All Fields",'Ok',{
+      duration:3000,
+    })
+  }
   }
 
 }

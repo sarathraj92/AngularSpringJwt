@@ -54,6 +54,7 @@ export class RegisterComponent implements OnInit {
           phoneNumber: this.registerform.value.phoneNumber as string,
           gender: this.registerform.value.gender as string,
           
+          
         }
         this.store.dispatch(beginRegister({ userdata: _userobj }));
 

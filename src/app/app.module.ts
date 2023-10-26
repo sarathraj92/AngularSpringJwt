@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,7 @@ import { UserDashboardComponent } from './pages/UserDashboard/user-dashboard/use
 import { MaterialModule } from './Material.module';
 import { AddUserComponent } from './pages/AdminDashboard/add-user/add-user.component';
 import { EditUserComponent } from './pages/AdminDashboard/edit-user/edit-user.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 
@@ -49,7 +50,8 @@ import { EditUserComponent } from './pages/AdminDashboard/edit-user/edit-user.co
     ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forRoot({'users':userReducer}),
-    EffectsModule.forRoot([userEffects,AppEffects])
+    EffectsModule.forRoot([userEffects,AppEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [
     {
